@@ -1,17 +1,22 @@
+using VirtualAudioTape.AudioFiles;
 using VirtualAudioTape.Services;
 
 namespace VirtualAudioTape;
 
 /// <summary>
-/// This class links with an audio file for further processing.
+/// This class provides interface for working with different audio files extensions.
 /// </summary>
-public class AudioTape
+public sealed class AudioTape : IDisposable
 {
-    private FileInfo _fileInfo;
-    private FileStream _fileStream;
+    private readonly AudioFile _audioFile;
 
     public AudioTape(string path)
     {
-        (_fileInfo, _fileStream) = FileService.LinkAudioFile(path);
+        _audioFile = FileService.LinkAudioFile(path);
+    }
+
+    public void Dispose()
+    {
+        _audioFile.Dispose();
     }
 }
