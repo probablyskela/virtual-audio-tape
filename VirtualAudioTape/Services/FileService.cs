@@ -2,10 +2,20 @@ using VirtualAudioTape.Exceptions;
 
 namespace VirtualAudioTape.Services;
 
+/// <summary>
+/// This class provides various methods for working with files.
+/// </summary>
 public static class FileService
 {
     private static readonly string[] AllowedExtensions = { "wav" };
 
+    /// <summary>
+    /// Verifies file's existence and extension then creates <see cref="FileInfo"/> and <see cref="FileStream"/> objects.   
+    /// </summary>
+    /// <param name="path">Path to the audio file.</param>
+    /// <returns></returns>
+    /// <exception cref="FileNotFoundException">File is not found.</exception>
+    /// <exception cref="FileExtensionNotSupportedException">File extension is not supported by the library.</exception>
     public static (FileInfo, FileStream) LinkAudioFile(string path)
     {
         if (!File.Exists(path))
